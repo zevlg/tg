@@ -28,6 +28,9 @@ ${TGL_OBJECTS_AUTO}: ${OBJ}/auto/%.o: ${AUTO}/%.c | create_dirs
 ${LIB}/libtgl.a: ${TGL_OBJECTS} ${TGL_COMMON_OBJECTS} ${TGL_OBJECTS_AUTO}
 	rm -f $@ && ar ruv $@ $^
 
+${LIB}/libtgl.so: ${TGL_OBJECTS} ${TGL_COMMON_OBJECTS} ${TGL_OBJECTS_AUTO}
+	${CC} -shared -o $@ $^ ${LINK_FLAGS}
+
 ${EXE}/generate: ${GENERATE_OBJECTS} ${TGL_COMMON_OBJECTS}
 	${CC} ${GENERATE_OBJECTS} ${TGL_COMMON_OBJECTS} ${LINK_FLAGS} -o $@
 
